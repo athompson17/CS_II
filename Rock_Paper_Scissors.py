@@ -31,6 +31,7 @@ def main():
                 print(colored("you both played rock so you tie",'grey'))
                 print(colored("you have " + str(playerpoints) + " points", 'grey', 'on_white'))
                 print(colored("computer has " + str(computerpoints) + " points", 'grey', 'on_white'))
+
             elif player == 'paper' and computer == 3:
                 print(colored("you both played paper so you tie",'white'))
                 print(colored("you have " + str(playerpoints) + " points", 'grey', 'on_white'))
