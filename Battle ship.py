@@ -80,9 +80,9 @@ def position(x):  # takes the position given by the player and tells code which 
 
 
 pg.alert("board position \n | 1 | 2 | 3 | 4 | 5 | \n | 6 | 7 | 8 | 9 |10 | \n |11 |12 |13 |14 |15 | \n |16 |17 |18 |19 "
-         "|20 |\n |21 |22 |23 |24 |25 |\n player 1 is red, player 2 is blue")
+         "|20 |\n |21 |22 |23 |24 |25 |\n player 1 is red, player 2 is blue",)
 
-board = " - - - - - \n - - - - - \n - - - - - \n - - - - - \n - - - - -"
+board = " ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈"
 p1_hit = 0
 p2_hit = 0
 x = 0
@@ -99,13 +99,14 @@ while guess < 5:
     attack = position(x)
     if turn_1(board, p1_hit):
         pg.alert('hit')
-        board[attack] = (colored("X", 'red'))
+        board[attack] = (colored("🔥", 'red'))
         board = (' '.join(map(str, board)))
-        print(board)
         p1_hit = +1
+        print(board)
+
     if not turn_1(board, p1_hit):
         pg.alert("miss")
-        board[attack] = ("M")
+        board[attack] = (colored("💦",'red'))
         board = (' '.join(map(str, board)))
         print(board)
     print('---------------------------')
@@ -115,20 +116,20 @@ while guess < 5:
     attack = position(x)
     if turn_2(board, p2_hit):
         pg.alert('hit')
-        board[attack] = (colored("X", 'blue'))
+        board[attack] = (colored("🔥",'blue'))
         board = (' '.join(map(str, board)))
-        print(board)
         p2_hit = +1
+        print(board)
     if not turn_2(board, p2_hit):
         pg.alert("miss")
-        board[attack] = ("M")
+        board[attack] = (colored("💦",'blue'))
         board = (' '.join(map(str, board)))
         print(board)
     print('---------------------------')
     guess += 1
 else:
     if p1_hit > p2_hit:
-        pg.alert('plqyer 1 wins')
+        pg.alert('player 1 wins')
         print('player 1 wins')
     elif p2_hit > p1_hit:
         pg.alert('player 2 wins')
