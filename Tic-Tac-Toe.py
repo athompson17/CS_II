@@ -6,6 +6,7 @@ Bugs: none
 """
 
 
+
 def player(new_board, x):  # checks if there is an X or O where someone is trying to play
     if new_board[position(x)] == '-':  # if there is no X or O it allows you to play
         return True
