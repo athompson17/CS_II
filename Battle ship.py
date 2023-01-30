@@ -1,23 +1,15 @@
 import random
 import pyautogui as pg
 from termcolor import colored
+from playsound import playsound
 
 
-def turn_1(board, p1_hit):
-    if spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):
-        return True
-    if not spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):
-        return False
+# change random spots to inputs from players, need a board_2, pg.alert the board, add stop time to allow for
+# switching computer, Figure out how to make ships bigger
+# make a def ship_spot
 
 
-def turn_2(board, p2_hit):
-    if spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):
-        return True
-    if not spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):
-        return False
-
-
-def spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):
+def spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):  # function that checks if payer 1's guess was a hit
     if spot_1 == attack or spot_2 == attack or spot_3 == attack or spot_4 == attack or spot_5 == attack:
 
         return True
@@ -26,114 +18,227 @@ def spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):
         return False
 
 
-def position(x):  # takes the position given by the player and tells code which spot in the list to change
-    if x == 1:
+def spot_check3(attack, spot_6, spot_7, spot_8, spot_9, spot_10):  # function that checks if payer 2's guess was a hit
+    if spot_6 == attack or spot_7 == attack or spot_8 == attack or spot_9 == attack or spot_10 == attack:
+
+        return True
+    elif spot_6 != attack or spot_7 != attack or spot_8 != attack or spot_9 != attack or spot_10 != attack:
+
+        return False
+
+
+def spot_check2(attack):  # checks if either player has guessed a spot yet
+    if board[attack] == '💦' or board[attack] == '🔥':
+        return False
+    elif board[attack] == '⚈':
+        return True
+    elif board2[attack] == '💦' or board2[attack] == '🔥':
+        return False
+    elif board2[attack] == '⚈':
+        return True
+
+
+def position(letter, number):  # takes the position given by the player and converts it to number corresponding with
+    # a board position
+    if letter == 'a' and number == 1 or letter == 'A' and number == 1:
         return 1
-    elif x == 2:
+    elif letter == 'b' and number == 1 or letter == 'B' and number == 1:
         return 2
-    elif x == 3:
+    elif letter == 'c' and number == 1 or letter == 'C' and number == 1:
         return 3
-    elif x == 4:
+    elif letter == 'd' and number == 1 or letter == 'D' and number == 1:
         return 4
-    elif x == 5:
+    elif letter == 'e' and number == 1 or letter == 'E' and number == 1:
         return 5
-    elif x == 6:
+    elif letter == 'a' and number == 2 or letter == 'A' and number == 2:
         return 7
-    elif x == 7:
+    elif letter == 'b' and number == 2 or letter == 'B' and number == 2:
         return 8
-    elif x == 8:
+    elif letter == 'c' and number == 2 or letter == 'C' and number == 2:
         return 9
-    elif x == 9:
+    elif letter == 'd' and number == 2 or letter == 'D' and number == 2:
         return 10
-    elif x == 10:
+    elif letter == 'e' and number == 2 or letter == 'E' and number == 2:
         return 11
-    elif x == 11:
+    elif letter == 'a' and number == 3 or letter == 'A' and number == 3:
         return 13
-    elif x == 12:
+    elif letter == 'b' and number == 3 or letter == 'B' and number == 3:
         return 14
-    elif x == 13:
+    elif letter == 'c' and number == 3 or letter == 'C' and number == 3:
         return 15
-    elif x == 14:
+    elif letter == 'd' and number == 3 or letter == 'D' and number == 3:
         return 16
-    elif x == 15:
+    elif letter == 'e' and number == 3 or letter == 'E' and number == 3:
         return 17
-    elif x == 16:
+    elif letter == 'a' and number == 4 or letter == 'A' and number == 4:
         return 19
-    elif x == 17:
+    elif letter == 'b' and number == 4 or letter == 'B' and number == 4:
         return 20
-    elif x == 18:
+    elif letter == 'c' and number == 4 or letter == 'C' and number == 4:
         return 21
-    elif x == 19:
+    elif letter == 'd' and number == 4 or letter == 'D' and number == 4:
         return 22
-    elif x == 20:
+    elif letter == 'e' and number == 4 or letter == 'E' and number == 4:
         return 23
-    elif x == 21:
+    elif letter == 'a' and number == 5 or letter == 'A' and number == 5:
         return 25
-    elif x == 22:
+    elif letter == 'b' and number == 5 or letter == 'B' and number == 5:
         return 26
-    elif x == 23:
+    elif letter == 'c' and number == 5 or letter == 'C' and number == 5:
         return 27
-    elif x == 24:
+    elif letter == 'd' and number == 5 or letter == 'D' and number == 5:
         return 28
-    elif x == 25:
+    elif letter == 'e' and number == 5 or letter == 'E' and number == 5:
         return 29
 
 
-pg.alert("board position \n | 1 | 2 | 3 | 4 | 5 | \n | 6 | 7 | 8 | 9 |10 | \n |11 |12 |13 |14 |15 | \n |16 |17 |18 |19 "
-         "|20 |\n |21 |22 |23 |24 |25 |\n player 1 is red, player 2 is blue",)
-
-board = " ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈"
+# introduction to the game, with some rules
+pg.alert("board position\n    a  b  c  d  e\n 1 ⚈ ⚈ ⚈ ⚈ ⚈ \n 2 ⚈ ⚈ ⚈ ⚈ ⚈ \n 3 ⚈ ⚈ ⚈ ⚈ ⚈ \n 4 ⚈ ⚈ ⚈ ⚈ ⚈ \n 5 ⚈ ⚈ ⚈ ⚈ ⚈ "
+         "\nplayer 1 is red, player 2 is blue, each player will pick the position of 5 ships each one "
+         "is one dot big, both players have 10 guesses to find the other players ships. Who ever has hit the most ships"
+         "at the end of 10 guesses wins")
 p1_hit = 0
+#    these keep track of each player's number of hits
 p2_hit = 0
 x = 0
 guess = 0
-spot_1 = random.randint(1, 5)
-spot_2 = random.randint(7, 11)
-spot_3 = random.randint(13, 17)
-spot_4 = random.randint(19, 23)
-spot_5 = random.randint(25, 29)
-while guess < 5:
-    board = board.split(' ')
-    attack = int(pg.prompt("P1, where do you want to play"))
-    x = attack
-    attack = position(x)
-    if turn_1(board, p1_hit):
-        pg.alert('hit')
-        board[attack] = (colored("🔥", 'red'))
-        board = (' '.join(map(str, board)))
-        p1_hit = +1
-        print(board)
+# ______________________________________________________________________
+# asks for both players positions
+spot_1 = str(pg.prompt('player 1 give 1st ship position'))
+letter = str(spot_1[0:1])
+number = int(spot_1[1:])
+spot_1 = position(letter, number)
 
-    if not turn_1(board, p1_hit):
-        pg.alert("miss")
-        board[attack] = (colored("💦",'red'))
-        board = (' '.join(map(str, board)))
-        print(board)
+spot_2 = str(pg.prompt('player 1 give 2nd ship position'))
+letter = str(spot_2[0:1])
+number = int(spot_2[1:])
+spot_2 = position(letter, number)
+if spot_1 == spot_2:  # sends to function that checks if that location has already been entered
+    spot_2 = pg.prompt('you have already put a ship there\n Please enter a new position')
+
+spot_3 = str(pg.prompt('player 1 give 3rd ship position'))
+letter = str(spot_3[0:1])
+number = int(spot_3[1:])
+spot_3 = position(letter, number)
+if spot_3 == spot_2 or spot_3 == spot_1:
+    spot_3 = pg.prompt('you have already put a ship there\n Please enter a new position')
+
+spot_4 = str(pg.prompt('player 1 give 4th ship position'))
+letter = str(spot_4[0:1])
+number = int(spot_4[1:])
+spot_4 = position(letter, number)
+if spot_4 == spot_3 or spot_4 == spot_2 or spot_4 == spot_1:
+    spot_4 = pg.prompt('you have already put a ship there\n Please enter a new position')
+
+spot_5 = str(pg.prompt('player 1 give 5th ship position'))
+letter = str(spot_5[0:1])
+number = int(spot_5[1:])
+spot_5 = position(letter, number)
+if spot_5 == spot_3 or spot_5 == spot_4 or spot_5 == spot_2 or spot_5 == spot_1:
+    spot_5 = pg.prompt('you have already put a ship there\n Please enter a new position')
+
+pg.alert('please give the computer to player 2')
+
+spot_6 = str(pg.prompt('player 2 give 1st ship position'))
+letter = str(spot_6[0:1])
+number = int(spot_6[1:])
+spot_6 = position(letter, number)
+
+spot_7 = str(pg.prompt('player 2 give 2nd ship position'))
+letter = str(spot_7[0:1])
+number = int(spot_7[1:])
+spot_7 = position(letter, number)
+if spot_7 == spot_6:
+    spot_7 = pg.prompt('you have already put a ship there\n Please enter a new position')
+
+spot_8 = str(pg.prompt('player 2 give 3rd ship position'))
+letter = str(spot_8[0:1])
+number = int(spot_8[1:])
+spot_8 = position(letter, number)
+if spot_8 == spot_6 or spot_8 == spot_7:
+    spot_8 = pg.prompt('you have already put a ship there\n Please enter a new position')
+
+spot_9 = str(pg.prompt('player 2 give 4th ship position'))
+letter = str(spot_9[0:1])
+number = int(spot_9[1:])
+spot_9 = position(letter, number)
+if spot_9 == spot_6 or spot_9 == spot_7 or spot_9 == spot_8:
+    spot_9 = pg.prompt('you have already put a ship there\n Please enter a new position')
+
+spot_10 = str(pg.prompt('player 2 give 5th ship position'))
+letter = str(spot_10[0:1])
+number = int(spot_10[1:])
+spot_10 = position(letter, number)
+if spot_10 == spot_6 or spot_10 == spot_7 or spot_10 == spot_8 or spot_10 == spot_9:
+    spot_10 = pg.prompt('you have already put a ship there\n Please enter a new position')
+
+board = " ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈"  # player 1's guess board
+board2 = " ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈ \n ⚈ ⚈ ⚈ ⚈ ⚈"  # player 2's guess board
+while guess < 10:
+    pg.alert('please give computer to player 1')  # pause given to allow for th players to switch the compurt around
+    attack = str(
+        pg.prompt("\n    a  b  c  d  e\n 1 ⚈ ⚈ ⚈ ⚈ ⚈ \n 2 ⚈ ⚈ ⚈ ⚈ ⚈ \n 3 ⚈ ⚈ ⚈ ⚈ ⚈ \n 4 ⚈ ⚈ ⚈ ⚈ ⚈ \n 5 ⚈ ⚈ ⚈ ⚈ ⚈"
+                  "\nP1, where do you want to play"))  # prompt to ask player 1 for their attack position
+    board2 = board2.split(' ')  # turns board from string to list
+    letter = str(attack[0:1])  # takes first character of the input
+    number = int(attack[1:])  # takes second character of the input and turns it into an int
+    attack = position(letter, number)  # converts the input into a number which translates to a position on the board
+
+    if not spot_check2(attack):  # function that checks if player has played at a spot previously
+        print('you can not play there')
+        attack = int(pg.prompt("new position")) # ask for new position
+        spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5)
+    if spot_check2(attack):
+        if spot_check3(attack, spot_6, spot_7, spot_8, spot_9, spot_10): # checks if the guess is a hit
+            pg.alert('hit') and playsound(r"C:\Users\athompson23\Desktop\ggg.mp3") # plays explosion sound
+            board2[attack] = (colored("🔥", 'red'))  # puts hit sign in the proper location
+            board2 = (' '.join(map(str, board2)))   # turns board back into a list
+            p1_hit += 1
+            print(board2)
+
+        if not spot_check3(attack, spot_6, spot_7, spot_8, spot_9, spot_10): # checks if the guess was a miss
+            pg.alert("miss") and playsound(r"C:\Users\athompson23\Desktop\www.mp3")     # plays water drop sound
+            board2[attack] = (colored("💦", 'red'))  # prints miss icon where ever the player missed
+            board2 = (' '.join(map(str, board2)))       # turns board into string
+            print(board2)
     print('---------------------------')
+    pg.alert('please give computer to player 2')
+    # -------------------------------------------------------------------------------------------
+    # (all the same just for player 2)
+    attack = str(
+        pg.prompt("\n    a  b  c  d  e\n 1 ⚈ ⚈ ⚈ ⚈ ⚈ \n 2 ⚈ ⚈ ⚈ ⚈ ⚈ \n 3 ⚈ ⚈ ⚈ ⚈ ⚈ \n 4 ⚈ ⚈ ⚈ ⚈ ⚈ \n 5 ⚈ ⚈ ⚈ ⚈ ⚈"
+                  "\nP2, where do you want to play"))
     board = board.split(' ')
-    attack = int(pg.prompt("P2, where do you want to play"))
-    x = attack
-    attack = position(x)
-    if turn_2(board, p2_hit):
-        pg.alert('hit')
-        board[attack] = (colored("🔥",'blue'))
-        board = (' '.join(map(str, board)))
-        p2_hit = +1
-        print(board)
-    if not turn_2(board, p2_hit):
-        pg.alert("miss")
-        board[attack] = (colored("💦",'blue'))
-        board = (' '.join(map(str, board)))
-        print(board)
+    letter = str(attack[0:1])
+    number = int(attack[1:])
+    attack = position(letter, number)
+    if not spot_check2(attack):
+        print('you can not play there')
+        attack = int(pg.prompt("new position"))
+        spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5)
+    if spot_check2(attack):
+        if spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):
+            pg.alert('hit') and playsound(r"C:\Users\athompson23\Desktop\ggg.mp3")
+            board[attack] = (colored("🔥", 'blue'))
+            board = (' '.join(map(str, board)))
+            p2_hit += 1
+            print(board)
+        if not spot_check(attack, spot_1, spot_2, spot_3, spot_4, spot_5):
+            pg.alert("miss") and playsound(r"C:\Users\athompson23\Desktop\www.mp3")
+            board[attack] = (colored("💦", 'blue'))
+            board = (' '.join(map(str, board)))
+            print(board)
     print('---------------------------')
     guess += 1
-else:
-    if p1_hit > p2_hit:
-        pg.alert('player 1 wins')
+else: # checks whichc player has won
+    if p1_hit > p2_hit:     # player 1 wins
+        score = str(p1_hit - p2_hit)
+        pg.alert('player 1 won by ' + score + ' points')
         print('player 1 wins')
-    elif p2_hit > p1_hit:
-        pg.alert('player 2 wins')
+    elif p2_hit > p1_hit:   # player 2 wins
+        score = str(p2_hit - p1_hit)
+        pg.alert('player 2 won by ' + score + ' points')
         print('player 2 wins')
-    elif p1_hit == p2_hit:
+    elif p1_hit == p2_hit:  # there is a tie
         pg.alert('Tie')
         print('Tie')
