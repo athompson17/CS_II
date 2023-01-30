@@ -239,6 +239,6 @@ else: # checks whichc player has won
         score = str(p2_hit - p1_hit)
         pg.alert('player 2 won by ' + score + ' points')
         print('player 2 wins')
-    elif p1_hit == p2_hit:  # there is a tie
+    elif p1_hit == p2_hit:  #   there is a tie
         pg.alert('Tie')
         print('Tie')
