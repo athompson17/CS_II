@@ -7,7 +7,8 @@ import urllib.request
 
 for line in urllib.request.urlopen('http://www.py4inf.com/code/mbox-short.txt'):
     words = line.split()
-    if len(words) < 2 or words[0] != 'From':
+
+    if len(words) < 2 or words[0] != b'From':
         continue
     else:
         if words[1] not in dictionary_addresses:
